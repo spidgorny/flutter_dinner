@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dinner/app/ui/details.dart';
 
 import '../data/recipe_data.dart';
 
@@ -12,13 +13,20 @@ class RecipeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgets = [
-      new SizedBox(
-          width: double.infinity,
-          height: 300.0,
-          child: new Image.network(
-            _recipe.imageURL,
-            fit: BoxFit.cover,
-          )),
+      GestureDetector(
+        child: new SizedBox(
+            width: double.infinity,
+            height: 300.0,
+            child: new Image.network(
+              _recipe.imageURL,
+              fit: BoxFit.cover,
+            )),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return DetailsPage(_recipe.recipeID);
+          }));
+        },
+      ),
       new Padding(
           padding: new EdgeInsets.only(left: 10.0, top: 10.0, bottom: 5.0),
           child: new Text(_recipe.name, maxLines: 1)),
